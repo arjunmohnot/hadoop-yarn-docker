@@ -25,6 +25,8 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+hadoop/hadoop-conf/SNAPSHOT/*SNAPSHOT.tar.gz
+*SNAPSHOT.tar.gz
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

@@ -1,0 +1,26 @@
+<configuration>
+  <property>
+    <name>yarn.scheduler.capacity.config.path</name>
+    <value>/usr/local/hadoop/etc/hadoop/dcs</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>resourcemanager</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.nodes.include-path</name>
+    <value>/usr/local/hadoop/etc/hadoop/includes</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.nodes.exclude-path</name>
+    <value>/usr/local/hadoop/etc/hadoop/excludes</value>
+  </property>
+  <property>
+  <name>yarn.resourcemanager.enable-tracking-for-unregistered-nodes</name>
+  <value>true</value>
+</property>
+</configuration>

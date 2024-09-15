@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  resourcemanager:
+    build: .
+    container_name: resourcemanager
+    hostname: resourcemanager
+    networks:
+      - hadoop-net
+    volumes:
+      - ./hadoop/hadoop-conf:/usr/local/hadoop/etc/hadoop
+    command: >
+      bash -c "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64 && export HADOOP_HOME=/usr/local/hadoop/ && export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop && /usr/local/hadoop/bin/yarn --daemon start resourcemanager && tail -f /dev/null"
+    user: hadoop
+    privileged: true  # Grant the container elevated privileges
+
+    ports:
+      - "8088:8088"   # ResourceManager UI
+      - "50070:50070" # HDFS Namenode UI
+    environment:
+      - YARN_RESOURCEMANAGER_HOSTNAME=resourcemanager
+      - YARN_NODEMANAGER_INCLUDE_FILE=/usr/local/hadoop/etc/hadoop/includes
+      - YARN_NODEMANAGER_EXCLUDE_FILE=/usr/local/hadoop/etc/hadoop/excludes
+
+  nodemanager1:
+    build: .
+    container_name: nodemanager1
+    hostname: nodemanager1
+    networks:
+      - hadoop-net
+    volumes:
+      - ./hadoop/hadoop-conf:/usr/local/hadoop/etc/hadoop
+    command: >
+      su - hadoop -c "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64 && export HADOOP_HOME=/usr/local/hadoop/ && export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop && /usr/local/hadoop/bin/yarn --daemon start nodemanager && tail -f /dev/null"
+
+  nodemanager2:
+    build: .
+    container_name: nodemanager2
+    hostname: nodemanager2
+    networks:
+      - hadoop-net
+    volumes:
+      - ./hadoop/hadoop-conf:/usr/local/hadoop/etc/hadoop
+    command: >
+      su - hadoop -c "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64 && export HADOOP_HOME=/usr/local/hadoop/ && export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop && /usr/local/hadoop/bin/yarn --daemon start nodemanager && tail -f /dev/null"
+
+  nodemanager3:
+    build: .
+    container_name: nodemanager3
+    hostname: nodemanager3
+    networks:
+      - hadoop-net
+    volumes:
+      - ./hadoop/hadoop-conf:/usr/local/hadoop/etc/hadoop
+    command: >
+      su - hadoop -c "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64 && export HADOOP_HOME=/usr/local/hadoop/ && export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop && /usr/local/hadoop/bin/yarn --daemon start nodemanager && tail -f /dev/null"
+
+  nodemanager4:
+    build: .
+    container_name: nodemanager4
+    hostname: nodemanager4
+    networks:
+      - hadoop-net
+    volumes:
+      - ./hadoop/hadoop-conf:/usr/local/hadoop/etc/hadoop
+    command: >
+      su - hadoop -c "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64 && export HADOOP_HOME=/usr/local/hadoop/ && export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop && /usr/local/hadoop/bin/yarn --daemon start nodemanager && tail -f /dev/null"
+
+networks:
+  hadoop-net:
+    driver: bridge
+
